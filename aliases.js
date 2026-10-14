@@ -1,20 +1,20 @@
 (() => {
   const TOP = {
     bgVolume: 'Music volume', sfxVolume: 'Sound effects volume', playerUDID: 'Device ID (UDID)', playerName: 'Player name',
-    playerUserID: 'Player user ID', playerID: 'Player user ID', secretNumber: 'Vault of Secrets number', hasRP: 'Moderator level', hasDRP: 'Demon rating privileges',
+    playerUserID: 'Player user ID', playerID: 'Player user ID', secretNumber: 'Vault answer (cod3breaker)', hasRP: 'Moderator status', hasDRP: 'Demon rating privileges',
     playerFrame: 'Cube icon', playerShip: 'Ship icon', playerBall: 'Ball icon', playerBird: 'UFO icon', playerDart: 'Wave icon',
     playerRobot: 'Robot icon', playerSpider: 'Spider icon', playerSwing: 'Swing icon', playerJetpack: 'Jetpack icon',
-    playerColor: 'Primary colour', playerColor2: 'Secondary colour', playerColor3: 'Glow colour', playerStreak: 'Trail',
+    playerColor: 'Primary colour', playerColor2: 'Secondary colour', playerColor3: 'Glow colour (-1 = same as secondary)', playerStreak: 'Trail',
     playerShipStreak: 'Ship fire', playerDeathEffect: 'Death effect', playerIconType: 'Selected icon type', playerGlow: 'Glow enabled',
     valueKeeper: 'Game settings (gv)', unlockValueKeeper: 'Unlocks and story flags (ugv)', customObjectDict: 'Custom objects', reportedAchievements: 'Reported achievements',
-    showSongMarkers: 'Show song markers', showProgressBar: 'Show progress bar', performanceMode: 'Low detail mode', clickedGarage: 'Opened icon kit',
-    clickedEditor: 'Opened editor', clickedPractice: 'Tried practice mode', showedEditorGuide: 'Editor guide shown', showedLowDetailDialog: 'Low detail prompt shown',
-    showedRateStarDialog: 'Rate prompt shown', hasRatedGame: 'Rated the game',
-    bootups: 'Times the game was opened', binaryVersion: 'Binary version', resolution: 'Screen resolution', texQuality: 'Texture quality',
+    showSongMarkers: 'Show song markers', showProgressBar: 'Show progress bar', performanceMode: 'Low detail mode', clickedGarage: 'Clicked Garage',
+    clickedEditor: 'Clicked Editor', clickedPractice: 'Clicked Practice', showedEditorGuide: 'Editor guide shown', showedLowDetailDialog: 'Low detail dialog shown',
+    showedRateStarDialog: 'Difficulty rating explanation shown', hasRatedGame: 'Rated the game',
+    bootups: 'Times the game was opened', binaryVersion: 'Binary version', resolution: 'Screen resolution', texQuality: 'Texture quality (0 auto, 1 low, 2 medium, 3 high)',
     timeOffset: 'Music offset (ms)', customFPSTarget: 'Custom FPS target', customMenuSongID: 'Menu song ID', customPracticeSongID: 'Practice song ID',
     dpad01: 'Platformer controls 1', dpad02: 'Platformer controls 2', dpad03: 'Platformer controls 3', dpad04: 'Platformer controls 4', dpad05: 'Platformer controls 5',
-    dpadLayout01: 'Platformer layout 1', dpadLayout02: 'Platformer layout 2', dpadLayout03: 'Platformer layout 3',
-    dpadLayoutDual01: 'Dual platformer layout 1', dpadLayoutDual02: 'Dual platformer layout 2', dpadLayoutDual03: 'Dual platformer layout 3',
+    dpadLayout01: 'Default platformer UI layout', dpadLayout02: 'Platformer layout 2', dpadLayout03: 'Platformer layout 3',
+    dpadLayoutDual01: 'Dual platformer UI + gamepad layouts', dpadLayoutDual02: 'Dual platformer layout 2', dpadLayoutDual03: 'Dual platformer layout 3',
     practiceOpacity: 'Practice buttons opacity', practicePosX: 'Practice buttons X', practicePosY: 'Practice buttons Y',
     musicEnabled: 'Music on (old)', fxEnabled: 'Sound effects on (old)', moreGamesString: 'More games (old)', hasNewGames: 'New games (old)',
     gameCenterEnabled: 'Game Center (old)', lastDay: 'Last day (old)', lastMonth: 'Last month (old)', clickedName: 'Clicked name (old)',
@@ -22,7 +22,7 @@
     showedRateDiffDialog: 'Rate difficulty prompt (old)', timeCounter: 'Anti-cheat counter (old)', commentSortRecent: 'Sort comments by recent (old)',
     kEnableTutorial: 'Tutorial enabled (old)', showedFirstTutorial: 'First tutorial shown (old)', firstSetup: 'First setup (old)', playerScoreValid: 'Score valid (old)',
     GJA_001: 'Account username', GJA_002: 'Account password (old, plain)', GJA_003: 'Account ID', GJA_004: 'Session ID (unused)', GJA_005: 'Account password (GJP2)',
-    GLM_01: 'Official level progress', GLM_02: 'Local levels (pre 1.1)', GLM_03: 'Online levels played', GLM_04: 'Rated levels (old)', GLM_06: 'Followed creators',
+    GLM_01: 'GLM_01 (undocumented/legacy)', GLM_02: 'GLM_02 (undocumented/legacy)', GLM_03: 'GLM_03 (undocumented/legacy)', GLM_04: 'GLM_04 (undocumented/legacy)', GLM_06: 'GLM_06 (undocumented/legacy)',
     GLM_07: 'Last session levels', GLM_08: 'Search filter states', GLM_09: 'Online search filters', GLM_10: 'Completed dailies', GLM_11: 'Current daily ID',
     GLM_12: 'Likes data', GLM_13: 'Levels you rated', GLM_14: 'Reported levels', GLM_15: 'Demons you rated', GLM_16: 'Gauntlet level progress',
     GLM_17: 'Current weekly ID', GLM_18: 'Saved level folders', GLM_19: 'Local level folders', GLM_20: 'Smart templates', GLM_21: 'Saved lists',
@@ -43,7 +43,7 @@
   const STATS = {
     1: 'Total jumps', 2: 'Total attempts', 3: 'Completed official levels', 4: 'Completed online levels', 5: 'Completed demons',
     6: 'Stars', 7: 'Completed map packs', 8: 'Secret coins', 9: 'Players destroyed (menu)', 10: 'Liked/disliked levels',
-    11: 'Rated levels', 12: 'User coins', 13: 'Diamonds (total)', 14: 'Mana orbs (current)', 15: 'Completed daily levels',
+    11: 'Rated levels', 12: 'User coins', 13: 'Diamonds (total)', 14: 'Current orbs', 15: 'Completed daily levels',
     16: 'Shadow shards', 17: 'Poison shards', 18: 'Fire shards', 19: 'Ice shards', 20: 'Lava shards', 21: 'Demon keys',
     22: 'Total orbs collected', 23: 'Earth shards', 24: 'Blood shards', 25: 'Metal shards', 26: 'Light shards', 27: 'Soul shards',
     28: 'Moons', 29: 'Diamond shards', 30: 'Fire path progress', 31: 'Ice path progress', 32: 'Poison path progress',
@@ -722,9 +722,9 @@
     GS_16: (k) => `Daily/weekly ${k} best %`, GS_17: (k) => `Daily/weekly ${k} stars`, GS_18: (k) => `Gauntlet level ${k} best %`, GS_19: (k) => `Treasure Room chest ${k}`,
     GS_21: chestName, GS_22: adChest, GS_23: (k) => `Gauntlet level ${k} best % (2)`, GS_24: (k) => `Daily/weekly ${k} best % (2)`,
     GS_25: (k) => `Weekly demon ${k} rewards`, GS_27: (k) => `List ${k.replace(/^_/, '')} diamonds`, GS_28: (k) => OLD_ITEMS[k] ? `Enabled: ${OLD_ITEMS[k]}` : `Enabled item ${k}`, GS_30: (k) => `Secret Room chest ${k}`,
-    GS_31: (k) => `Event ${k} rewards`, GLM_01: lvl('Official level'), GLM_02: lvl('Local level'), GLM_03: lvl('Online level'), GLM_10: lvl('Daily level'),
+    GS_31: (k) => `Event ${k} rewards`, GLM_10: lvl('Daily level'),
     GLM_16: lvl('Gauntlet level'), LLM_01: lvl('Local level slot'), MDLM_001: (k) => `Song ${k}`, customObjectDict: (k) => `Custom object ${k}`,
-    GLM_04: (k) => /^\d+$/.test(k) ? `Level ${k} difficulty` : '', GLM_06: (k) => /^\d+$/.test(k) ? `Followed creator (account ${k})` : '', GLM_07: idKey('Level'), GLM_08: (k) => FILTER[k] || '', GLM_09: (k) => FILTER[k] || '', GLM_12: like, GLM_13: idKey('Rated level'), GLM_14: idKey('Reported level'), GLM_15: idKey('Rated demon'),
+    GLM_07: idKey('Level'), GLM_08: (k) => FILTER[k] || '', GLM_09: (k) => FILTER[k] || '', GLM_12: like, GLM_13: idKey('Rated level'), GLM_14: idKey('Reported level'), GLM_15: idKey('Rated demon'),
     reportedAchievements: (k) => achName(k) || `Reported achievement ${k}`, GLM_18: (k) => `Saved folder ${k}`, GLM_19: (k) => `Local folder ${k}`
   };
 
@@ -740,7 +740,7 @@
     const top = parent.slice(1).replace(/#\d+$/, '');
     if (top === 'GS_value') {
       if (STATS[key]) return STATS[key];
-      const m = /^unique_(\d+)_/.exec(key);
+      const m = /^unique_(\d+)_\d+$/.exec(key);
       return m ? `Official level ${m[1]} secret coin` : '';
     }
     if (top === 'valueKeeper') return GV[num(key, /^gv_(\d+)$/)] || unlockIcon(key);

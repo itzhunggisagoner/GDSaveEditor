@@ -359,6 +359,13 @@
     const op = { t: 'edit', id: item.id, old: item.value, new: v };
     record(op); apply(op, false); refresh(); toast('Value updated');
   });
+  /* ---- dark / light theme ---- */
+  $('#themeBtn').addEventListener('click', () => {
+    const light = document.documentElement.dataset.theme !== 'light';
+    if (light) document.documentElement.dataset.theme = 'light'; else delete document.documentElement.dataset.theme;
+    document.querySelector('meta[name=theme-color]').content = light ? '#f1f3ee' : '#101112';
+    try { localStorage.setItem('gdse-theme', light ? 'light' : 'dark'); } catch (e) {}
+  });
   /* ---- help + moderator flag safety ---- */
   const HELP_URL = 'https://github.com/itzhunggisagoner/GDSaveEditor/blob/main/HELP.md';
   $('#helpBtn').addEventListener('click', () => { $('#helpUrl').textContent = HELP_URL; $('#helpDialog').showModal(); });
