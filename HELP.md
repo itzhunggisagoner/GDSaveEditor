@@ -9,7 +9,7 @@ GDSaveEditor is a local-first Geometry Dash save editor. Everything runs in your
 | Platform | Location |
 | --- | --- |
 | Windows | `C:/Users/Name/AppData/Local/GeometryDash` |
-| Android [(Geode)](https://geode-sdk.org)| `Android/media/com.geode.launcher/saves` (root or backup tools needed) |
+| Android [(Geode)](https://geode-sdk.org)| `Android/media/com.geode.launcher/saves`|
 
 - `CCGameManager.dat` – icons, stats, settings, achievements, progress.
 - `CCLocalLevels.dat` – your local levels progress.
