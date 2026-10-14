@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101112">
+  <title>GDSaveEditor</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="resources/icons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="resources/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="resources/icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="resources/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">GDSave<span class="brand-light">Editor</span></div>
+      <div class="actions">
+        <button class="btn btn-quiet always" id="helpBtn" title="How to use this editor">Help</button>
+        <button class="btn btn-quiet" id="undoBtn" disabled title="Undo (Ctrl+Z)">Undo</button>
+        <button class="btn btn-quiet" id="redoBtn" disabled title="Redo (Ctrl+Y)">Redo</button>
+        <button class="btn btn-outline" id="exportJsonBtn" title="Edited save as JSON (types preserved)">Export JSON</button>
+        <button class="btn btn-outline" id="exportXmlBtn" title="Readable XML for inspection">Export XML</button>
+        <button class="btn btn-outline" id="exportDatBtn" title="Re-encrypted save the game can read">Export .dat (GD format)</button>
+        <button class="btn btn-primary" id="browseBtn">Open file</button>
+      </div>
+    </header>
+
+    <main>
+      <input type="file" id="fileInput" accept=".dat,.xml,.txt,application/octet-stream,text/plain" hidden>
+
+      <section class="drop" id="dropZone">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 15v4a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-4"/></svg>
+        <h1>Drop a save file here</h1>
+        <p>CCGameManager.dat or CCLocalLevels.dat. Everything is decoded in your browser; keep a backup of the original before editing.</p>
+        <button class="btn btn-primary" id="dropBrowse">Choose file</button>
+      </section>
+
+      <section class="panel" id="dataPanel" hidden>
+        <div class="panel-head">
+          <div class="file-info"><span class="file-dot"></span><div><strong id="fileName"></strong><small id="fileMeta"></small></div></div>
+          <div class="panel-tools">
+            <label class="searchbox"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4"/></svg><input id="searchInput" type="search" placeholder="Search keys or values" autocomplete="off" aria-label="Search"><kbd>/</kbd></label>
+            <button class="btn btn-outline" id="addKeyBtn">Add key</button>
+            <button class="btn btn-quiet" id="collapseBtn" hidden>Collapse all</button>
+            <button class="btn btn-quiet" id="openBtn" hidden>Open all</button>
+            <select id="typeFilter" aria-label="Filter by type">
+              <option value="all">All types</option><option value="text">Text</option><option value="number">Numbers</option><option value="bool">Booleans</option><option value="empty">Empty</option>
+            </select>
+          </div>
+        </div>
+        <div class="stats" id="statsBar" hidden></div>
+        <div class="warnbar" id="warnBar" hidden>
+          <span id="warnText"></span>
+          <button class="btn btn-outline" id="warnFixBtn">Reset flags</button>
+          <button class="btn btn-quiet" id="warnHideBtn">Dismiss</button>
+        </div>
+        <div class="selbar" id="selBar" hidden>
+          <span class="sel-count" id="selCount"></span>
+          <button class="btn btn-primary" id="bulkEditBtn">Edit selected</button>
+          <button class="btn btn-quiet" id="selVisibleBtn">Select all shown</button>
+          <button class="btn btn-quiet" id="selClearBtn">Clear</button>
+        </div>
+        <div class="table-wrap" id="tableWrap">
+          <table>
+            <colgroup><col class="sel-col"><col class="key-col"><col><col class="type-col"><col class="action-col"></colgroup>
+            <thead><tr><th class="sel-col"><input type="checkbox" id="selAll" class="sel-box" aria-label="Select all shown values" title="Select all shown values"></th><th>Key</th><th>Value</th><th class="type-col">Type</th><th></th></tr></thead>
+            <tbody id="dataBody"></tbody>
+          </table>
+        </div>
+        <div class="panel-foot"><span id="resultText"></span><span>Hover a value to see it in full · Shift+click to select a range</span></div>
+      </section>
+    </main>
+    <footer>
+      <span>This website is 100% offline. This means files are processed locally and never uploaded.</span>
+      <a class="star" href="https://github.com/itzhunggisagoner/GDSaveEditor" target="_blank" rel="noopener">This website is <b>open source</b>. If it helps you, please give it a <b>&#9733; star</b> on GitHub.</a>
+    </footer>
+  </div>
+
+  <dialog id="editDialog">
+    <form method="dialog" id="editForm">
+      <div class="dialog-head"><h2 id="editTitle">Edit value</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></div>
+      <label class="field-label" for="editKey">Key</label><input id="editKey" class="field" readonly>
+      <label class="field-label" for="editValue">Value</label><textarea id="editValue" class="field value-field" rows="4"></textarea>
+      <p class="field-error" id="editError" role="alert"></p>
+      <div class="dialog-actions"><button class="btn btn-quiet" value="cancel">Cancel</button><button class="btn btn-primary" id="saveEditBtn" value="save">Save changes</button></div>
+    </form>
+  </dialog>
+  <dialog id="helpDialog">
+    <form method="dialog">
+      <div class="dialog-head"><h2>Open the help guide?</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></div>
+      <p class="bulk-info">The usage guide is a Markdown file on GitHub. It will open in a new tab, and your current save stays untouched in this page.</p>
+      <p class="bulk-preview" id="helpUrl"></p>
+      <div class="dialog-actions"><button class="btn btn-quiet" value="cancel">Not now</button><button class="btn btn-primary" id="helpOpenBtn" value="open">Open on GitHub</button></div>
+    </form>
+  </dialog>
+  <dialog id="bulkDialog">
+    <form method="dialog" id="bulkForm">
+      <div class="dialog-head"><h2 id="bulkTitle">Edit selected</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></div>
+      <p class="bulk-info" id="bulkInfo"></p>
+      <label class="field-label" for="bulkMode">Action</label>
+      <select id="bulkMode" class="field">
+        <option value="set">Set all to this value</option>
+        <option value="add">Add to each number</option>
+        <option value="sub">Subtract from each number</option>
+        <option value="mul">Multiply each number by</option>
+      </select>
+      <div id="bulkValueWrap"><label class="field-label" for="bulkValue">Value</label><textarea id="bulkValue" class="field value-field" rows="3"></textarea></div>
+      <div id="bulkBoolWrap" hidden><label class="field-label" for="bulkBool">Value</label><select id="bulkBool" class="field"><option value="true">true</option><option value="false">false</option></select></div>
+      <p class="bulk-preview" id="bulkPreview"></p>
+      <p class="field-error" id="bulkError" role="alert"></p>
+      <div class="dialog-actions"><button class="btn btn-quiet" value="cancel">Cancel</button><button class="btn btn-primary" id="saveBulkBtn" value="save">Apply to selected</button></div>
+    </form>
+  </dialog>
+  <dialog id="addDialog">
+    <form method="dialog" id="addForm">
+      <div class="dialog-head"><h2>Add key</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></div>
+      <label class="field-label" for="addParent">Add to</label><select id="addParent" class="field"></select>
+      <label class="field-label" for="addKey">Name</label><input id="addKey" class="field" autocomplete="off" spellcheck="false">
+      <label class="field-label" for="addType">Type</label>
+      <select id="addType" class="field"><option value="s">Text</option><option value="i">Whole number</option><option value="r">Decimal number</option><option value="b">Boolean</option><option value="d">Group (empty)</option></select>
+      <div id="addValueWrap"><label class="field-label" for="addValue">Value</label><textarea id="addValue" class="field value-field" rows="3"></textarea></div>
+      <div id="addBoolWrap" hidden><label class="field-label" for="addBool">Value</label><select id="addBool" class="field"><option value="true">true</option><option value="false">false</option></select></div>
+      <p class="field-error" id="addError" role="alert"></p>
+      <div class="dialog-actions"><button class="btn btn-quiet" value="cancel">Cancel</button><button class="btn btn-primary" id="saveAddBtn" value="save">Add key</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="codec.js"></script>
+  <script src="aliases.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
