@@ -1,3 +1,5 @@
+- This project is sill not showing correctly alias of keys. If you known the correct alias key. Contribute to [here](https://github.com/itzhunggisagoner/GDSaveEditor/pulls)
+
 # GDSaveEditor
 
 A offline Geometry Dash save editor.
