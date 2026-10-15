@@ -1,7 +1,7 @@
 (() => {
   const TOP = {
     bgVolume: 'Music volume', sfxVolume: 'Sound effects volume', playerUDID: 'Device ID (UDID)', playerName: 'Player name',
-    playerUserID: 'Player user ID', playerID: 'Player user ID', secretNumber: 'Vault answer (cod3breaker)', hasRP: 'Moderator status', hasDRP: 'Demon rating privileges',
+    playerUserID: 'Player user ID', secretNumber: 'Vault answer (cod3breaker)', hasRP: 'Moderator status', hasDRP: 'Demon rating privileges',
     playerFrame: 'Cube icon', playerShip: 'Ship icon', playerBall: 'Ball icon', playerBird: 'UFO icon', playerDart: 'Wave icon',
     playerRobot: 'Robot icon', playerSpider: 'Spider icon', playerSwing: 'Swing icon', playerJetpack: 'Jetpack icon',
     playerColor: 'Primary colour', playerColor2: 'Secondary colour', playerColor3: 'Glow colour (-1 = same as secondary)', playerStreak: 'Trail',
@@ -22,10 +22,10 @@
     showedRateDiffDialog: 'Rate difficulty prompt (old)', timeCounter: 'Anti-cheat counter (old)', commentSortRecent: 'Sort comments by recent (old)',
     kEnableTutorial: 'Tutorial enabled (old)', showedFirstTutorial: 'First tutorial shown (old)', firstSetup: 'First setup (old)', playerScoreValid: 'Score valid (old)',
     GJA_001: 'Account username', GJA_002: 'Account password (old, plain)', GJA_003: 'Account ID', GJA_004: 'Session ID (unused)', GJA_005: 'Account password (GJP2)',
-    GLM_01: 'GLM_01 (undocumented/legacy)', GLM_02: 'GLM_02 (undocumented/legacy)', GLM_03: 'GLM_03 (undocumented/legacy)', GLM_04: 'GLM_04 (undocumented/legacy)', GLM_06: 'GLM_06 (undocumented/legacy)',
-    GLM_07: 'Last session levels', GLM_08: 'Search filter states', GLM_09: 'Online search filters', GLM_10: 'Completed dailies', GLM_11: 'Current daily ID',
+    GLM_01: 'Official level progress', GLM_02: 'Local levels (old, moved to CCLocalLevels)', GLM_03: 'Online levels played', GLM_04: 'Difficulty ratings (old, removed after 1.9)', GLM_06: 'Followed creators (account IDs)',
+    GLM_07: 'Last session levels', GLM_08: 'Search filter states', GLM_09: 'Available search filters (unused)', GLM_10: 'Completed dailies', GLM_11: 'Current daily ID',
     GLM_12: 'Likes data', GLM_13: 'Levels you rated', GLM_14: 'Reported levels', GLM_15: 'Demons you rated', GLM_16: 'Gauntlet level progress',
-    GLM_17: 'Current weekly ID', GLM_18: 'Saved level folders', GLM_19: 'Local level folders', GLM_20: 'Smart templates', GLM_21: 'Saved lists',
+    GLM_17: 'Current weekly ID', GLM_18: 'Saved level folders', GLM_19: 'Local level folders', GLM_20: 'Smart templates', GLM_21: 'Saved lists (removed after 2.200)',
     GLM_22: 'Favourited lists', GLM_23: 'Current event ID',
     GS_value: 'Player stats', GS_completed: 'Completed levels', GS_3: 'Level coins (unverified)', GS_4: 'Level coins (verified)', GS_5: 'Map pack stars',
     GS_6: 'Shop purchases', GS_7: 'Level best %', GS_8: 'Unused', GS_9: 'Stars from downloaded levels', GS_10: 'Official level best %',
@@ -34,9 +34,6 @@
     GS_22: 'GD World ad rewards', GS_23: 'Gauntlet level best % (2)', GS_24: 'Daily/weekly best % (2)', GS_25: 'Weekly demon rewards', GS_26: 'Active path',
     GS_27: 'List rewards', GS_28: 'Enabled items', GS_29: 'Path bug fix', GS_30: 'Secret Room (Wraith) rewards', GS_31: 'Event chest rewards', GS_32: 'Unlocked gauntlets (unused)',
     LLM_01: 'Local levels', LLM_02: 'Binary version (local levels)', LLM_03: 'Local lists',
-    dailyID: 'Current daily ID', weeklyID: 'Current weekly ID', eventID: 'Current event ID', demonKeysFromOrbs: 'Demon keys from orbs', songPriority: 'Song priority',
-    username: 'Account username', accountID: 'Account ID', hashedPassword: 'Account password (hashed)', activePath: 'Active path', pathPricingFix: 'Path bug fix',
-    isMod: 'Moderator level', textureQuality: 'Texture quality', clickedIconKit: 'Opened icon kit',
     MDLM_001: 'Song info', MDLM_002: 'Song priority', MDLM_003: 'Song data (unknown)', KBM_001: 'Keybindings', KBM_002: 'Keybindings (2)'
   };
 
@@ -72,8 +69,8 @@
     93: 'More local levels per page', 94: 'More comments mode', 95: 'Flippy useless mode', 96: 'Wave trail colour switch', 97: 'Link controls (editor)',
     98: 'Level leaderboard type', 99: 'Show leaderboard percent', 100: 'Practice death effect', 101: 'Force smooth fix', 102: 'Smooth fix in editor',
     103: 'Layer locking (editor)', 104: 'Record order', 105: 'Start-pos playback', 106: 'Meltdown promo', 108: 'Auto low detail', 109: 'Level info label',
-    110: 'Fast editor preview', 112: 'Increase scale limit (editor)', 113: 'Flip platformer controls', 115: 'Show FPS', 116: 'Use custom FPS',
-    117: 'Preview particle', 118: 'Preview animation', 119: 'Don’t save level data', 121: 'Hide invisible objects (editor)', 122: 'Disable menu music',
+    110: 'Fast editor preview', 112: 'Increase scale limit (editor)', 113: 'Flip platformer controls', 114: 'Unknown (used in PlayerObject)', 115: 'Show FPS', 116: 'Use custom FPS',
+    117: 'Preview particle', 118: 'Preview animation', 119: 'Don’t save level data', 120: 'Unknown (seen on a 2020 stream)', 121: 'Hide invisible objects (editor)', 122: 'Disable menu music',
     125: 'Unlock practice music', 126: 'Decimal percentage', 127: 'Save gauntlet levels', 128: 'Lock cursor in-game', 129: 'Disable portal labels',
     130: 'Orb labels', 131: 'Use nearby as reference', 132: 'Don’t delete (smart template)', 133: 'Group ID filter (editor)', 134: 'Hide attempts',
     135: 'Hide attempts in practice', 136: 'Extra LDM', 137: 'Hide particle icons (editor)', 139: 'Colour channel filter (editor)', 140: 'Disable orb scale',
@@ -89,18 +86,19 @@
 
   const UGV = {
     1: 'Challenge unlocked', 2: 'Glubfub hint 1', 3: 'Glubfub hint 2', 4: 'Challenge completed', 5: 'Treasure Room unlocked', 6: 'Chamber of Time unlocked',
-    7: 'Chamber of Time discovered', 8: 'Master Emblem found', 9: 'Gatekeeper dialogue', 10: 'Scratch dialogue', 11: 'Secret shop unlocked',
-    12: 'Spoke to Demon Guardian', 13: 'Demon freed', 14: 'Demon key 1', 15: 'Demon key 2', 16: 'Demon key 3', 17: 'Shopkeeper first dialogue',
+    7: 'Chamber of Time discovered', 8: 'Master Emblem shown', 9: 'Gatekeeper dialogue', 10: 'Scratch dialogue', 11: 'Secret shop unlocked',
+    12: 'Spoke to Demon Guardian', 13: 'Demon freed', 14: 'Demon key 1', 15: 'Demon key 2', 16: 'Demon key 3', 17: 'Shopkeeper first dialogue (500 orbs)',
     18: 'Online levels unlocked in GD World', 19: 'Demon found in Demon Room', 20: 'Community shop unlocked', 21: 'PotBor dialogue', 22: 'YouTube chest',
     23: 'Facebook chest', 24: 'Twitter chest', 25: 'Explorers unlocked', 26: 'Twitch chest', 27: 'Discord chest', 28: 'Tower clicked', 29: 'Tower entered',
     30: 'Terms of service accepted', 31: 'Zolguroth encountered', 32: 'Reddit chest', 33: 'Tower floor 1 completed', 34: 'Diamond shop unlocked',
-    35: 'Mechanic unlocked', 36: 'Mechanic dialogue', 37: 'Diamond shopkeeper dialogue'
+    35: 'Mechanic unlocked', 36: 'Mechanic dialogue', 37: 'Diamond shopkeeper dialogue', 38: 'Unknown (undocumented, added after 2.2)'
   };
 
   const DONE = [
-    ['gdemon_', 'Gauntlet demon'], ['ddemon_', 'Daily demon'], ['demon_', 'Demon'],
-    ['gstar_', 'Gauntlet star reward'], ['dstar_', 'Daily star reward'], ['star_', 'Star reward'],
-    ['pack_', 'Map pack'], ['n_', 'Official level'], ['c_', 'Online level'], ['d_', 'Daily level'], ['g_', 'Gauntlet level'], ['e_', 'Event level']
+    ['gdemon_', 'Gauntlet demon collected, level'], ['ddemon_', 'Weekly demon collected, timely ID'], ['demon_', 'Demon collected, level'],
+    ['gstar_', 'Gauntlet stars collected, level'], ['dstar_', 'Daily stars collected, timely ID'], ['star_', 'Stars collected, level'],
+    ['pack_', 'Map pack completed:'], ['n_', 'Official level completed (normal mode):'], ['c_', 'Online level completed:'], ['d_', 'Daily level completed:'],
+    ['g_', 'Gauntlet level completed:'], ['e_', 'Event level completed:']
   ];
 
   const ACH = {
@@ -680,72 +678,171 @@
   const LEVEL = {
     k1: 'Level ID', k2: 'Level name', k3: 'Description (base64)', k4: 'Level data (objects)', k5: 'Creator', k6: 'Creator user ID', k7: 'Difficulty', k8: 'Official song ID',
     k9: 'Rating', k10: 'Rating sum', k11: 'Downloads', k12: 'Completes', k13: 'Editable', k14: 'Verified', k15: 'Uploaded', k16: 'Level version', k17: 'Game version',
-    k18: 'Attempts', k19: 'Normal mode best %', k20: 'Practice mode best %', k21: 'Level type', k22: 'Likes', k23: 'Length', k24: 'Dislikes', k25: 'Is demon', k26: 'Stars',
+    k18: 'Attempts', k19: 'Normal mode best %', k20: 'Practice mode best %', k21: 'Level type (1 official, 2 local, 3 saved, 4 online)', k22: 'Like rating (likes - dislikes)', k23: 'Length', k24: 'Dislikes (unused)', k25: 'Is demon', k26: 'Stars',
     k27: 'Feature score', k33: 'Auto', k34: 'Replay data', k35: 'Hidden', k36: 'Jumps', k37: 'Required coins', k38: 'Unlocked', k39: 'Level size', k40: 'Build version',
     k41: 'Password', k42: 'Original level ID', k43: 'Two-player mode', k45: 'Custom song ID', k46: 'Level revision', k47: 'Modified', k48: 'Object count', k50: 'Binary version',
     k51: 'Capacity 1', k52: 'Capacity 2', k53: 'Capacity 3', k54: 'Capacity 4', k60: 'Creator account ID', k61: 'Coin 1 collected', k62: 'Coin 2 collected', k63: 'Coin 3 collected',
     k64: 'Total coins', k65: 'Coins verified', k66: 'Requested stars', k67: 'Capacity string', k68: 'Triggered anti-cheat', k69: 'High object count', k71: 'Mana orb %',
-    k72: 'Has low detail mode', k73: 'Low detail mode on', k74: 'Daily/weekly ID', k75: 'Epic rating', k76: 'Demon type', k77: 'Is gauntlet level', k78: 'Alt game level',
+    k72: 'Has low detail mode', k73: 'Low detail mode on', k74: 'Daily/weekly ID', k75: 'Epic rating (0 none, 1 epic, 2 legendary, 3 mythic)', k76: 'Demon type', k77: 'Is gauntlet level', k78: 'Alt game level',
     k79: 'Unlisted', k80: 'Seconds spent editing', k81: 'Seconds spent editing (copies)', k82: 'Favourited', k83: 'Level order', k84: 'Level folder', k85: 'Clicks',
-    k86: 'Play time', k87: 'Level seed', k88: 'Level progress', k89: 'Verification check', k90: 'Leaderboard %', k91: 'Locked editor layers', k93: 'Unlimited objects',
-    k94: 'Unlisted (friends only)', k95: 'Verification time', k101: 'Saved camera positions', k102: 'Preview lock X', k103: 'Preview lock Y', k104: 'Song list', k105: 'SFX list',
-    k106: 'Song size', k107: 'Best time', k108: 'Best points', k109: 'Local best times', k110: 'Local best points', k111: 'Platformer seed', k112: 'No shake',
+    k86: 'Play time', k87: 'Level seed', k88: 'Level progress', k89: 'Verification check', k90: 'Leaderboard %', k91: 'Locked editor layers', k92: 'Unknown (GDL22)', k93: 'Unlimited objects enabled',
+    k94: 'Unlisted (friends only)', k95: 'Verification time (physics steps, 240/s)', k101: 'Saved camera positions', k102: 'Preview lock X', k103: 'Preview lock Y', k104: 'Song list', k105: 'SFX list',
+    k106: 'Song size (unused)', k107: 'Best time', k108: 'Best points', k109: 'Local best times', k110: 'Local best points', k111: 'Platformer seed', k112: 'No shake',
     k115: 'Ticks (best time)', k116: 'Ticks (best points)', k117: 'Clicks (best time)', k118: 'Clicks (best points)', k119: 'Inputs (best time)', k120: 'Inputs (best points)',
     k121: 'Coins (best time)', k122: 'Coins (best points)', k123: 'Time saved', k124: 'Points saved', k125: 'Click-between-steps override',
     kI1: 'Editor camera X', kI2: 'Editor camera Y', kI3: 'Editor camera zoom', kI4: 'Build tab page', kI5: 'Build tab', kI6: 'Build tab pages', kI7: 'Editor layer',
-    kCEK: 'Object type (kCEK)'
+    kCEK: 'Encoder key (4 = level)'
   };
-  const LEVEL_TOPS = new Set(['GLM_01', 'GLM_02', 'GLM_03', 'GLM_10', 'GLM_16', 'GLM_20', 'GLM_21', 'GLM_22', 'LLM_01', 'LLM_03']);
+  const LEVEL_TOPS = new Set(['GLM_01', 'GLM_02', 'GLM_03', 'GLM_10', 'GLM_16', 'LLM_01']);
+  const LIST = {
+    k1: 'List ID', k2: 'List name', k3: 'Description (base64)', k5: 'Creator', k7: 'Difficulty', k11: 'Downloads', k15: 'Uploaded', k16: 'List version',
+    k21: 'List type (2 local, 3 saved, 4 online)', k22: 'Like rating (likes - dislikes)', k25: 'Is demon', k26: 'Stars', k27: 'Featured', k42: 'Original list ID',
+    k46: 'List revision', k47: 'Modified', k60: 'Creator account ID', k79: 'Unlisted', k82: 'Favourited', k83: 'List order', k94: 'Unlisted (friends only)',
+    k96: 'Level IDs (in order)', k97: 'Levels', k98: 'Upload date (UNIX)', k99: 'Update date (UNIX)', k100: 'Levels loaded', k113: 'Diamond reward',
+    k114: 'Required levels', kCEK: 'Encoder key (12 = list)'
+  };
+  const LIST_TOPS = new Set(['GLM_21', 'GLM_22', 'LLM_03']);
+  const TEMPLATE = { 1: 'Smart template ID', 2: 'Name', 3: 'Template variations', 4: 'Allow rotation', 5: 'Allow flip X', 6: 'Allow flip Y', 7: 'Ignore corners', kCEK: 'Encoder key (10 = smart template)' };
+  const QUEST = {
+    1: 'Quest type (1 orbs, 2 coins, 3 stars)', 2: 'Progress', 3: 'Goal', 4: 'Reward (diamonds)', 5: 'Time left', 6: 'Active', 7: 'Quest name',
+    8: 'Position (1 top, 2 middle, 3 bottom)', kCEK: 'Encoder key (7 = quest)'
+  };
+  const SONG = {
+    1: 'Song ID', 2: 'Song name', 3: 'Artist ID', 4: 'Artist name', 5: 'Size (MB)', 6: 'YouTube video ID', 7: 'YouTube channel ID', 8: 'Artist verified',
+    9: 'Song priority', 10: 'Download link', 11: 'NONG type (0 none, 1 NCS)', 12: 'Extra artist IDs', 13: 'Shows NEW icon', 14: 'NEW icon type (0 yellow, 1 blue)',
+    15: 'Extra artist names', 16: 'YouTube channel URL', kCEK: 'Encoder key (6 = song)'
+  };
+  const REWARD_TOPS = new Set(['GS_11', 'GS_19', 'GS_21', 'GS_25', 'GS_31']);
+  const REWARD_ITEM = { 1: 'Item type', 2: 'Custom item ID', 3: 'Reward amount', 4: 'Item unlock value', kCEK: 'Encoder key (9 = reward object)' };
+  const ITEM_TYPE = {
+    1: 'Fire shard', 2: 'Ice shard', 3: 'Poison shard', 4: 'Shadow shard', 5: 'Lava shard', 6: 'Demon key', 7: 'Orbs', 8: 'Diamonds', 9: 'Custom object (icon, colour, key)',
+    10: 'Earth shard', 11: 'Blood shard', 12: 'Metal shard', 13: 'Light shard', 14: 'Soul shard', 15: 'Gold key'
+  };
+  const CHESTS = {
+    1: 'Challenge chest', 2: 'Demon Guardian chest', 3: 'Chamber of Time chest', 4: 'Treasure Room 50-key chest', 5: 'Treasure Room 100-key chest',
+    6: 'Treasure Room 200-key chest', 7: 'YouTube chest', 8: 'Twitter chest', 9: 'Facebook chest', 10: 'Twitch chest', 11: 'Discord chest',
+    22: 'Zolguroth chest', 23: 'Help button chest', 24: 'Reddit chest'
+  };
+  const OFFICIAL = {
+    1: 'Stereo Madness', 2: 'Back On Track', 3: 'Polargeist', 4: 'Dry Out', 5: 'Base After Base', 6: 'Cant Let Go', 7: 'Jumper', 8: 'Time Machine',
+    9: 'Cycles', 10: 'xStep', 11: 'Clutterfunk', 12: 'Theory of Everything', 13: 'Electroman Adventures', 14: 'Clubstep', 15: 'Electrodynamix',
+    16: 'Hexagon Force', 17: 'Blast Processing', 18: 'Theory of Everything 2', 19: 'Geometrical Dominator', 20: 'Deadlocked', 21: 'Fingerdash', 22: 'Dash',
+    3001: 'The Challenge', 5001: 'The Tower', 5002: 'The Sewers', 5003: 'The Cellar', 5004: 'The Secret Hollow',
+    1001: 'The Seven Seas (Meltdown)', 1002: 'Viking Arena (Meltdown)', 1003: 'Airborne Robots (Meltdown)',
+    2001: 'Payload (World)', 2002: 'Beast Mode (World)', 2003: 'Machina (World)', 2004: 'Years (World)', 2005: 'Frontlines (World)',
+    2006: 'Space Pirates (World)', 2007: 'Striker (World)', 2008: 'Embers (World)', 2009: 'Round 1 (World)', 2010: 'Monster Dance Off (World)',
+    4001: 'Press Start (SubZero)', 4002: 'Nock Em (SubZero)', 4003: 'Power Trip (SubZero)'
+  };
+  const off = (id) => OFFICIAL[id] ? `${OFFICIAL[id]} [${id}]` : `Official level ${id}`;
+  const modVar = (k) => {
+    const m = /^gv_([^/]+)\/(.+)$/.exec(k);
+    if (!m) return '';
+    const known = {
+      'cvolton.level-id-api/editor_id_max': 'Highest local level ID (Level ID API mod)',
+      'cvolton.level-id-api/editor_list_id_max': 'Highest local list ID (Level ID API mod)'
+    }[`${m[1]}/${m[2]}`];
+    return known || `Geode mod ${m[1]}: ${m[2]}`;
+  };
   const FILTER = {
     Diff0: 'Filter: N/A difficulty', Diff1: 'Filter: Auto', Diff2: 'Filter: Easy', Diff3: 'Filter: Normal', Diff4: 'Filter: Hard', Diff5: 'Filter: Harder', Diff6: 'Filter: Insane', Diff7: 'Filter: Demon',
     Len0: 'Filter: Tiny', Len1: 'Filter: Short', Len2: 'Filter: Medium', Len3: 'Filter: Long', Len4: 'Filter: XL', Len5: 'Filter: Platformer',
     demon_filter: 'Filter: Demon difficulty', uncompleted_filter: 'Filter: Uncompleted', completed_filter: 'Filter: Completed', featured_filter: 'Filter: Featured', song_filter: 'Filter: Official song',
     original_filter: 'Filter: Original', twoP_filter: 'Filter: Two-player', enable_songFilter: 'Filter: Song filter on', customsong_filter: 'Filter: Custom song ID', nostar_filter: 'Filter: No star',
-    coin_filter: 'Filter: Coins', follow_filter: 'Filter: Followed', friend_filter: 'Filter: Friends', epic_filter: 'Filter: Epic', star_filter: 'Filter: Star rated'
+    coin_filter: 'Filter: Coins', follow_filter: 'Filter: Followed', friend_filter: 'Filter: Friends', epic_filter: 'Filter: Epic', star_filter: 'Filter: Star rated', mythic_filter: 'Filter: Mythic', legendary_filter: 'Filter: Legendary'
   };
   const ICONS = {
     i: 'Cube icon', ship: 'Ship icon', ball: 'Ball icon', bird: 'UFO icon', dart: 'Wave icon', robot: 'Robot icon', spider: 'Spider icon', swing: 'Swing icon', jetpack: 'Jetpack icon',
     special: 'Trail', c0: 'Primary colour', c1: 'Secondary colour', death: 'Death effect', shipstreak: 'Ship fire'
   };
   const unlockIcon = (k) => { const m = /^([a-z]+\d?)_(\d+)$/.exec(k); return m && ICONS[m[1]] ? `${ICONS[m[1]]} ${m[2]} unlocked` : ''; };
-  const OLD_ITEMS = { '17_12': 'Music unlocker', '18_12': 'Slow robot walk', '19_12': 'Fast robot run', '20_12': 'Spider run', '21_12': 'Music customizer' };
-  const chestName = (k) => { const n = Number(k); return /^\d+$/.test(k) ? (n >= 12 && n <= 21 ? `Ad chest ${k}` : `Special chest ${k}`) : `Gauntlet reward ${k}`; };
+  const OLD_ITEMS = { '17_12': 'Music unlocker', '18_12': 'Slow robot walk', '19_12': 'Fast robot run', '20_12': 'Spider Naruto run', '21_12': 'Music customizer' };
+  const chestName = (k) => {
+    const g = /^g_(\d+)$/.exec(k);
+    if (g) return `Gauntlet ${g[1]} rewards`;
+    const o = /^o_secret_(\d+)$/.exec(k);
+    if (o) return `Secret Room chest ${o[1]} rewards`;
+    const pr = /^pr_(\d+)$/.exec(k);
+    if (pr) return `Unidentified reward pr_${pr[1]}`;
+    const ev = /^d(\d+)$/.exec(k);
+    if (ev) return `Event ${ev[1]} rewards`;
+    if (!/^\d+$/.test(k)) return '';
+    const n = Number(k);
+    return CHESTS[n] || (n >= 12 && n <= 21 ? `Ad chest ${n}` : `Chest ${k}`);
+  };
+  const timelyChest = (k) => {
+    const m = /^(\d+)_(\d+)$/.exec(k);
+    return m ? `${m[1] === '1' ? '4-hour' : m[1] === '2' ? '24-hour' : `Type ${m[1]}`} chest ${m[2]}` : '';
+  };
   const like = (k) => { const m = /^like_(\d+)_(\d+)_(\d+)_(\d+)$/.exec(k); return m ? `${m[3] === '1' ? 'Like' : 'Dislike'} · level ${m[2]} (type ${m[1]})` : ''; };
   const idKey = (label) => (k) => /^\d+$/.test(k) ? `${label} ${k}` : '';
-  const lvl = (label) => (k) => { const m = /^k_(\d+)$/.exec(k); return m ? `${label} ${m[1]}` : ''; };
-  const coin = (k) => { const m = /^(\d+)_(\d+)$/.exec(k); return m ? `Level ${m[1]} coin ${m[2]}` : ''; };
+  const lvl = (label) => (k) => { const m = /^(?:k_)?(\d+)$/.exec(k); return m ? `${label} ${m[1]}` : ''; };
+  const coin = (k) => { const m = /^(\d+)_(\d+)(?:_(\w+))?$/.exec(k); return m ? `Level ${m[1]} coin ${m[2]}${m[3] ? ` (extra tag ${m[3]})` : ''}` : ''; };
   const timely = (k) => { const m = /^([cd])_?(\d+)$/.exec(k); return m ? `${m[1] === 'c' ? 'Challenge' : 'Daily'} ${m[2]} diamonds` : ''; };
   const adChest = (k) => { const t = +k; return t > 0 ? `GD World ad chest ${new Date(t * 1000).toISOString().slice(0, 10)}` : ''; };
   const BY_ID = {
-    GS_3: coin, GS_4: coin, GS_5: (k) => `Map pack ${k} stars`, GS_6: (k) => `Shop item ${k} price`, GS_7: (k) => `Level ${k} best %`, GS_9: (k) => `Level ${k} stars`,
-    GS_10: (k) => `Official level ${k} best %`, GS_11: (k) => `Timely chest ${k}`, GS_12: (k) => `Active quest slot ${k}`, GS_14: timely, GS_15: (k) => `Upcoming quest slot ${k}`,
+    GS_3: coin, GS_4: coin, GS_5: (k) => `Map pack ${k.replace(/^pack_/, '')} stars`, GS_6: (k) => `Shop item ${k} price`, GS_7: (k) => `Level ${k} best %`, GS_9: (k) => `Level ${k} stars`,
+    GS_10: (k) => /^\d+$/.test(k) ? `${off(k)} best %` : '', GS_11: timelyChest, GS_12: (k) => `Active quest slot ${k}`, GS_14: timely, GS_15: (k) => `Upcoming quest slot ${k}`,
     GS_16: (k) => `Daily/weekly ${k} best %`, GS_17: (k) => `Daily/weekly ${k} stars`, GS_18: (k) => `Gauntlet level ${k} best %`, GS_19: (k) => `Treasure Room chest ${k}`,
     GS_21: chestName, GS_22: adChest, GS_23: (k) => `Gauntlet level ${k} best % (2)`, GS_24: (k) => `Daily/weekly ${k} best % (2)`,
-    GS_25: (k) => `Weekly demon ${k} rewards`, GS_27: (k) => `List ${k.replace(/^_/, '')} diamonds`, GS_28: (k) => OLD_ITEMS[k] ? `Enabled: ${OLD_ITEMS[k]}` : `Enabled item ${k}`, GS_30: (k) => `Secret Room chest ${k}`,
-    GS_31: (k) => `Event ${k} rewards`, GLM_10: lvl('Daily level'),
-    GLM_16: lvl('Gauntlet level'), LLM_01: lvl('Local level slot'), MDLM_001: (k) => `Song ${k}`, customObjectDict: (k) => `Custom object ${k}`,
-    GLM_07: idKey('Level'), GLM_08: (k) => FILTER[k] || '', GLM_09: (k) => FILTER[k] || '', GLM_12: like, GLM_13: idKey('Rated level'), GLM_14: idKey('Reported level'), GLM_15: idKey('Rated demon'),
+    GS_25: (k) => { const m = /^d(\d+)$/.exec(k); return m ? `Weekly demon ${m[1]} rewards` : ''; }, GS_27: (k) => `List ${k.replace(/^lr_/, '')} diamonds`, GS_28: (k) => OLD_ITEMS[k] ? `Enabled: ${OLD_ITEMS[k]}` : `Enabled item ${k}`, GS_30: (k) => `Secret Room chest ${k.replace(/^o_secret_/, '')}`,
+    GS_31: (k) => { const m = /^d(\d+)$/.exec(k); return m ? `Event ${m[1]} rewards` : ''; }, GLM_10: lvl('Daily level'),
+    GLM_01: (k) => { const m = /^(?:k_)?(\d+)$/.exec(k); return m ? off(m[1]) : ''; }, GLM_20: lvl('Smart template slot'), GLM_02: lvl('Local level slot'), GLM_03: lvl('Online level'), GLM_16: lvl('Gauntlet level'), LLM_01: lvl('Local level slot'), MDLM_001: (k) => `Song ${k}`, customObjectDict: (k) => `Custom object ${k}`,
+    GLM_04: idKey('Rated level (old)'), GLM_06: idKey('Followed creator (account ID)'), GLM_07: idKey('Level'), GLM_08: (k) => FILTER[k] || '', GLM_09: (k) => FILTER[k] || '', GLM_12: like, GLM_13: idKey('Rated level'), GLM_14: idKey('Reported level'), GLM_15: idKey('Rated demon'),
     reportedAchievements: (k) => achName(k) || `Reported achievement ${k}`, GLM_18: (k) => `Saved folder ${k}`, GLM_19: (k) => `Local folder ${k}`
   };
 
   const num = (k, re) => { const m = re.exec(k); return m ? +m[1] : NaN; };
 
+  function deeper(parent, key, depth) {
+    const segs = parent.split('/').map((s) => s.replace(/#\d+$/, ''));
+    const root = segs[1];
+    const last = segs[segs.length - 1];
+    if (depth === 2) {
+      if (LEVEL_TOPS.has(root)) return LEVEL[key] || '';
+      if (LIST_TOPS.has(root)) return LIST[key] || '';
+      if (root === 'GLM_20') return TEMPLATE[key] || '';
+      if (root === 'GS_12' || root === 'GS_15') return QUEST[key] || '';
+      if (root === 'MDLM_001') return SONG[key] || '';
+      if (REWARD_TOPS.has(root)) {
+        const m = /^k_(\d+)$/.exec(key);
+        if (m) return `Reward object ${m[1]}`;
+        if (key === 'kCEK') return 'Encoder key (8 = reward item)';
+        if (key === '1' || key === '2') {
+          if (root === 'GS_11') return key === '1' ? 'Chest ID' : 'Chest type (1 = 4-hour, 2 = 24-hour)';
+          return `Reward item field ${key}`;
+        }
+        if (key === '3') return 'Reward objects';
+      }
+      return '';
+    }
+    if (REWARD_TOPS.has(root)) {
+      const m = /^k_(\d+)$/.exec(key);
+      if (m) return `Reward object ${m[1]}`;
+      return /^k_\d+$/.test(last) ? REWARD_ITEM[key] || '' : '';
+    }
+    if (LIST_TOPS.has(root)) {
+      if (depth === 3 && last === 'k97') return /^\d+$/.test(key) ? `Level ${key}` : '';
+      if (depth === 4 && segs[3] === 'k97') return LEVEL[key] || '';
+      return '';
+    }
+    if (root === 'GLM_20' && depth === 3 && last === '3') return `Layout ${key}`;
+    return '';
+  }
+
   function of(parent, key, depth) {
     if (depth === 0) return TOP[key] || '';
-    if (depth === 2) {
-      const root = parent.split('/')[1].replace(/#\d+$/, '');
-      return LEVEL_TOPS.has(root) ? LEVEL[key] || '' : '';
-    }
-    if (depth !== 1) return '';
+    if (key === '_isArr') return 'Array marker (_isArr)';
+    if (depth !== 1) return deeper(parent, key, depth);
     const top = parent.slice(1).replace(/#\d+$/, '');
     if (top === 'GS_value') {
       if (STATS[key]) return STATS[key];
-      const m = /^unique_(\d+)_\d+$/.exec(key);
-      return m ? `Official level ${m[1]} secret coin` : '';
+      const m = /^unique_(\d+)_(\d+)$/.exec(key);
+      return m ? `${off(m[1])} secret coin ${m[2]}` : '';
     }
-    if (top === 'valueKeeper') return GV[num(key, /^gv_(\d+)$/)] || unlockIcon(key);
+    if (top === 'valueKeeper') return GV[num(key, /^gv_(\d+)$/)] || modVar(key) || unlockIcon(key);
     if (top === 'unlockValueKeeper') return UGV[num(key, /^ugv_?(\d+)$/)] || unlockIcon(key);
     if (top === 'GS_completed') {
+      if (key.startsWith('n_') && /^\d+$/.test(key.slice(2))) return `${off(key.slice(2))} completed (normal mode)`;
       for (const [p, label] of DONE) if (key.startsWith(p)) return `${label} ${key.slice(p.length)}`;
       return '';
     }
