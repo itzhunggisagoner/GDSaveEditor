@@ -44,6 +44,7 @@
           <div class="file-info"><span class="file-dot"></span><div><strong id="fileName"></strong><small id="fileMeta"></small></div></div>
           <div class="panel-tools">
             <label class="searchbox"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4"/></svg><input id="searchInput" type="search" placeholder="Search keys or values" autocomplete="off" aria-label="Search"><kbd>/</kbd></label>
+            <button class="btn btn-primary" id="quickBtn" hidden title="Edit orbs, keys, diamonds, shards, demons and more">Quick stats</button>
             <button class="btn btn-outline" id="addKeyBtn">Add key</button>
             <button class="btn btn-quiet" id="collapseBtn" hidden>Collapse all</button>
             <button class="btn btn-quiet" id="openBtn" hidden>Open all</button>
@@ -95,6 +96,15 @@
       <p class="bulk-info">The usage guide is a Markdown file on GitHub. It will open in a new tab, and your current save stays untouched in this page.</p>
       <p class="bulk-preview" id="helpUrl"></p>
       <div class="dialog-actions"><button class="btn btn-quiet" value="cancel">Not now</button><button class="btn btn-primary" id="helpOpenBtn" value="open">Open on GitHub</button></div>
+    </form>
+  </dialog>
+  <dialog id="quickDialog" class="wide">
+    <form method="dialog" id="quickForm">
+      <div class="dialog-head"><h2>Quick stats</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></div>
+      <p class="bulk-info">Whole numbers only (0 to 2,147,483,647). Leave a field untouched to keep it. Missing stats are created in the same format the game uses.</p>
+      <div id="quickBody"></div>
+      <p class="field-error" id="quickError" role="alert"></p>
+      <div class="dialog-actions"><button class="btn btn-quiet" value="cancel">Cancel</button><button class="btn btn-primary" id="saveQuickBtn" value="save">Apply</button></div>
     </form>
   </dialog>
   <dialog id="bulkDialog">

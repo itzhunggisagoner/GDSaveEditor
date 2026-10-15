@@ -133,6 +133,7 @@
     const bar = $('#statsBar');
     bar.hidden = !main.length;
     bar.innerHTML = main.map(chip).join('') + (state.moreStats ? extra.map(chip).join('') : '') + (extra.length ? `<button class="chip chip-more" data-more="1">${state.moreStats ? 'Show less' : `+${extra.length} more`}</button>` : '');
+    $('#quickBtn').hidden = !state.byId.has(STATS_PARENT);
     $('#undoBtn').disabled = !state.undo.length; $('#redoBtn').disabled = !state.redo.length;
     selChrome(); warnChrome();
   }
@@ -184,7 +185,10 @@
   }
   function record(op) { state.undo.push(op); if (state.undo.length > 200) state.undo.shift(); state.redo = []; }
   function apply(op, undo) {
-    if (op.t === 'multi') {
+    if (op.t === 'batch') {
+      const list = undo ? op.ops.slice().reverse() : op.ops;
+      for (const o of list) apply(o, undo);
+    } else if (op.t === 'multi') {
       for (const x of op.edits) { const e = state.byId.get(x.id); if (!e) continue; e.value = undo ? x.old : x.new; e.type = classify(e.tag, e.value); state.flashSet.add(e.id); }
     } else if (op.t === 'edit') {
       const e = state.byId.get(op.id); if (!e) return;
@@ -303,6 +307,11 @@
       $('#editTitle').textContent = `Edit ${item.key}`; $('#editError').textContent = ''; $('#editDialog').showModal();
     }
   });
+  const STAT_MAX = 2147483647;
+  const isStat = (e) => !!e && !e.group && e.parent === STATS_PARENT && /^\d+$/.test(e.key);
+  const normStat = (v) => { const t = String(v).trim(); return /^\d+$/.test(t) ? String(Number(t)) : t; };
+  const badStat = (v) => !/^\d+$/.test(v) ? 'Stats must be whole numbers 0 or higher (no spaces, letters or decimals).' : Number(v) > STAT_MAX ? `Stats cannot exceed ${STAT_MAX.toLocaleString()} (the game stores them as a 32-bit number).` : '';
+  const invalidItem = (e, v) => (isStat(e) ? badStat(v) : invalid(e.type === 'bool' ? 'b' : e.tag, v));
   const invalid = (tag, v) => tag === 'i' && !/^-?\d+$/.test(v) ? 'This value must be a whole number.'
     : tag === 'r' && !/^-?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i.test(v) ? 'This value must be a number.'
     : tag === 'b' && !['true', 'false'].includes(v) ? 'Use true or false.' : '';
@@ -351,8 +360,8 @@
     if (ev.submitter?.id !== 'saveEditBtn') return;
     ev.preventDefault();
     const item = state.byId.get(state.editingId); if (!item) return;
-    const v = $('#editValue').value;
-    const bad = invalid(item.type === 'bool' ? 'b' : item.tag, v);
+    const v = isStat(item) ? normStat($('#editValue').value) : $('#editValue').value;
+    const bad = invalidItem(item, v);
     if (bad) { $('#editError').textContent = bad; return; }
     $('#editDialog').close();
     if (v === item.value) return;
@@ -409,15 +418,16 @@
     const operand = Number(raw);
     for (const e of items) {
       let v;
-      if (mode === 'set') v = raw;
+      if (mode === 'set') v = isStat(e) ? normStat(raw) : raw;
       else {
         if (!isNum(e)) { skipped.push(e); continue; }
         const cur = Number(e.value);
         v = String(mode === 'add' ? cur + operand : mode === 'sub' ? cur - operand : cur * operand);
-        if (isInt(e)) { const r = Math.round(Number(v)); if (!Number.isSafeInteger(r)) { skipped.push(e); continue; } v = String(r); }
+        if (isStat(e)) { const r = Math.round(Number(v)); if (!Number.isSafeInteger(r)) { skipped.push(e); continue; } v = String(Math.min(STAT_MAX, Math.max(0, r))); }
+        else if (isInt(e)) { const r = Math.round(Number(v)); if (!Number.isSafeInteger(r)) { skipped.push(e); continue; } v = String(r); }
         else if (!Number.isFinite(Number(v))) { skipped.push(e); continue; }
       }
-      if (invalid(e.type === 'bool' ? 'b' : e.tag, v)) { skipped.push(e); continue; }
+      if (invalidItem(e, v)) { skipped.push(e); continue; }
       if (v !== e.value) plan.push({ id: e.id, old: e.value, new: v });
     }
     return { items, plan, skipped, mode, raw };
@@ -454,6 +464,52 @@
     const op = { t: 'multi', edits: plan };
     record(op); apply(op, false); refresh();
     toast(`Updated ${plan.length.toLocaleString()} value${plan.length === 1 ? '' : 's'}${skipped.length ? ` · skipped ${skipped.length.toLocaleString()}` : ''}`);
+  });
+
+
+  /* ---- quick stats editor ---- */
+  const QUICK = [
+    ['Currency', [14, 22, 13, 29, 21, 28, 6, 12, 8]],
+    ['Progress', [5, 3, 4, 15, 7, 40, 41, 1, 2]],
+    ['Shards', [16, 17, 18, 19, 20, 23, 24, 25, 26, 27]],
+    ['Path progress', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]]
+  ];
+  const statsGroup = () => state.byId.get(STATS_PARENT);
+  const statEntry = (k) => state.entries.find((e) => e.parent === STATS_PARENT && e.key === String(k) && !e.group);
+  function openQuick() {
+    if (!statsGroup()) return toast('This file has no GS_value stats (open CCGameManager.dat)');
+    $('#quickBody').innerHTML = QUICK.map(([title, keys]) => `<h3 class="quick-title">${esc(title)}</h3><div class="quick-grid">` + keys.map((k) => {
+      const e = statEntry(k), label = GDAliases.STATS[k] || `Stat ${k}`;
+      return `<label class="quick-item"><span>${esc(label)} <small>key ${k}</small></span><input class="field" type="text" inputmode="numeric" data-key="${k}" data-old="${e ? esc(e.value) : ''}" value="${e ? esc(e.value) : ''}" placeholder="not set" autocomplete="off"></label>`;
+    }).join('') + '</div>').join('');
+    $('#quickError').textContent = ''; $('#quickDialog').showModal();
+  }
+  $('#quickBtn').addEventListener('click', openQuick);
+  $('#quickForm').addEventListener('submit', (ev) => {
+    if (ev.submitter?.id !== 'saveQuickBtn') return;
+    ev.preventDefault();
+    const changes = [];
+    for (const inp of $('#quickBody').querySelectorAll('input[data-key]')) {
+      const v = normStat(inp.value), old = inp.dataset.old;
+      if (v === '' || v === old) continue;
+      const bad = badStat(v);
+      if (bad) { $('#quickError').textContent = `${GDAliases.STATS[inp.dataset.key] || 'Stat ' + inp.dataset.key}: ${bad}`; inp.focus(); return; }
+      changes.push([inp.dataset.key, v]);
+    }
+    if (!changes.length) { $('#quickError').textContent = 'Nothing to change.'; return; }
+    $('#quickDialog').close();
+    const group = statsGroup(), ops = [];
+    const sibling = state.entries.find((e) => e.parent === STATS_PARENT && !e.group && e.tag === 's') || state.entries.find((e) => e.parent === STATS_PARENT && !e.group && /^\d+$/.test(e.key));
+    const tag = sibling ? sibling.tag : 's';
+    for (const [key, v] of changes) {
+      const e = statEntry(key);
+      if (e) { const op = { t: 'edit', id: e.id, old: e.value, new: v }; apply(op, false); ops.push(op); continue; }
+      const blk = blockOf(group), id = `${STATS_PARENT}/${key}#0`, alias = GDAliases.of(STATS_PARENT, key, 1);
+      const item = { id, key, depth: group.depth + 1, parent: STATS_PARENT, alias, kl: key, al: alias.toLowerCase(), tag, added: true, group: false, value: v, type: classify(tag, v) };
+      const op = { t: 'add', index: blk.index + blk.items.length, items: [item] }; apply(op, false); ops.push(op);
+    }
+    state.redo = []; state.undo.push({ t: 'batch', ops }); if (state.undo.length > 200) state.undo.shift();
+    refresh(); toast(`Updated ${changes.length} stat${changes.length === 1 ? '' : 's'}`);
   });
 
   $('#exportDatBtn').addEventListener('click', async () => {

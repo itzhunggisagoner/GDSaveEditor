@@ -41,11 +41,11 @@
     1: 'Total jumps', 2: 'Total attempts', 3: 'Completed official levels', 4: 'Completed online levels', 5: 'Completed demons',
     6: 'Stars', 7: 'Completed map packs', 8: 'Secret coins', 9: 'Players destroyed (menu)', 10: 'Liked/disliked levels',
     11: 'Rated levels', 12: 'User coins', 13: 'Diamonds (total)', 14: 'Current orbs', 15: 'Completed daily levels',
-    16: 'Shadow shards', 17: 'Poison shards', 18: 'Fire shards', 19: 'Ice shards', 20: 'Lava shards', 21: 'Demon keys',
+    16: 'Shadow shards', 17: 'Poison shards', 18: 'Fire shards', 19: 'Ice shards', 20: 'Lava shards', 21: 'Keys (current)',
     22: 'Total orbs collected', 23: 'Earth shards', 24: 'Blood shards', 25: 'Metal shards', 26: 'Light shards', 27: 'Soul shards',
     28: 'Moons', 29: 'Diamond shards', 30: 'Fire path progress', 31: 'Ice path progress', 32: 'Poison path progress',
     33: 'Shadow path progress', 34: 'Lava path progress', 35: 'Earth path progress', 36: 'Blood path progress', 37: 'Metal path progress',
-    38: 'Light path progress', 39: 'Soul path progress', 40: 'Completed gauntlets', 41: 'List rewards', 42: 'Completed insane levels', 43: 'Event keys',
+    38: 'Light path progress', 39: 'Soul path progress', 40: 'Completed gauntlets', 41: 'List rewards', 42: 'Completed insane levels (unverified)', 43: 'Event keys (unverified)',
     unique_secretB03: 'Glubfub coin', unique_secret04: 'Official level page secret coin', unique_secret06: 'Sparky coin'
   };
 
